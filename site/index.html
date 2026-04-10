@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spotstrom-Rechner AT</title>
+    <meta
+      name="description"
+      content="Berechnet historische Spotstromkosten fuer oesterreichische Lastprofile direkt im Browser."
+    >
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Spotstrom-Rechner AT</p>
+          <h1>Historische Spotstromkosten direkt im Browser berechnen</h1>
+          <p class="hero-text">
+            Lade dein Lastprofil hoch, setze Lieferanten-Offset und USt und berechne die
+            verbrauchsgewichteten Kosten samt Diagrammen lokal in deinem Browser.
+          </p>
+        </div>
+        <div class="hero-panel">
+          <h2>Datenschutz</h2>
+          <p>
+            Die Verarbeitung deines Lastprofils passiert lokal in deinem Browser. Es werden
+            keine Verbrauchsdaten oder Nutzungsdaten an diese Website gesendet.
+          </p>
+          <p>
+            Fuer die Berechnung werden nur oeffentliche Day-Ahead-Preise direkt von
+            <a href="https://spot.utilitarian.io" target="_blank" rel="noreferrer">Utilitarian Spot</a>
+            geladen. Dein Lastprofil wird dabei nicht hochgeladen.
+          </p>
+        </div>
+      </header>
+
+      <main class="content-grid">
+        <section class="panel input-panel">
+          <h2>Berechnung starten</h2>
+          <form id="calculator-form" class="calculator-form">
+            <label class="field">
+              <span>Lastprofil-CSV</span>
+              <input id="load-profile" type="file" accept=".csv,text/csv" required>
+              <small>Erwartet wird ein Smart-Meter-Lastprofil mit Zeitstempel und Verbrauch in kWh.</small>
+            </label>
+
+            <div class="field-grid">
+              <label class="field">
+                <span>Lieferanten-Offset in ct/kWh netto</span>
+                <input id="supplier-offset" type="number" value="1.49" min="0" step="0.01">
+              </label>
+              <label class="field">
+                <span>USt in %</span>
+                <input id="vat-rate" type="number" value="20" min="0" step="0.1">
+              </label>
+            </div>
+
+            <details class="advanced-settings">
+              <summary>Erweiterte Einstellungen</summary>
+              <label class="field compact-field">
+                <span>Bedeutung des Messzeitpunkts</span>
+                <select id="timestamp-is">
+                  <option value="end" selected>Messzeitpunkt ist Intervallende</option>
+                  <option value="start">Messzeitpunkt ist Intervallbeginn</option>
+                </select>
+              </label>
+            </details>
+
+            <button id="calculate-button" type="submit" class="primary-button">
+              Berechnung starten
+            </button>
+          </form>
+
+          <div id="status" class="status" aria-live="polite"></div>
+        </section>
+
+        <section id="results" class="results" hidden>
+          <section class="panel">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Ergebnisse</p>
+                <h2>Preise und Gesamtkosten</h2>
+              </div>
+              <div id="export-actions" class="export-actions"></div>
+            </div>
+            <div id="kpi-grid" class="kpi-grid"></div>
+            <div id="result-summary" class="result-summary"></div>
+          </section>
+
+          <section class="panel report-panel">
+            <h2>Ergebnisbericht</h2>
+            <p class="chart-explainer">
+              Der Bericht fasst alle relevanten Kennzahlen zusammen und kann als Textdatei
+              heruntergeladen werden.
+            </p>
+            <pre id="report-output" class="report-output"></pre>
+          </section>
+
+          <section class="chart-grid">
+            <article class="panel chart-panel">
+              <h3>Monatliche Energiekosten</h3>
+              <p class="chart-explainer">
+                Zeigt pro Monat den Marktpreisanteil, den Lieferanten-Offset und die daraus
+                resultierenden Bruttokosten.
+              </p>
+              <div id="chart-monthly-costs" class="chart-surface"></div>
+            </article>
+
+            <article class="panel chart-panel">
+              <h3>Tageskosten im Jahresverlauf</h3>
+              <p class="chart-explainer">
+                Macht sichtbar, an welchen Tagen die Kosten besonders hoch oder niedrig waren.
+              </p>
+              <div id="chart-daily-costs" class="chart-surface"></div>
+            </article>
+
+            <article class="panel chart-panel">
+              <h3>Durchschnittliche Kosten nach Wochentag</h3>
+              <p class="chart-explainer">
+                Vergleicht, ob einzelne Wochentage typischerweise teurer oder guenstiger sind.
+              </p>
+              <div id="chart-weekday-costs" class="chart-surface"></div>
+            </article>
+
+            <article class="panel chart-panel">
+              <h3>Verbrauch und Marktpreis pro Monat</h3>
+              <p class="chart-explainer">
+                Stellt gegenueber, wie sich monatlicher Verbrauch und verbrauchsgewichteter
+                Spotmarktpreis zueinander verhalten.
+              </p>
+              <div id="chart-monthly-consumption-price" class="chart-surface"></div>
+            </article>
+
+            <article class="panel chart-panel chart-panel-wide">
+              <h3>Durchschnittliches Tages-Lastprofil</h3>
+              <p class="chart-explainer">
+                Die blaue Linie zeigt den durchschnittlichen Verbrauch pro 15-Minuten-Block
+                ueber das gesamte Jahr. Das Band markiert die mittleren 50 % aller Beobachtungen
+                und macht Streuung und wiederkehrende Lastspitzen sichtbar.
+              </p>
+              <div id="chart-daily-load-profile" class="chart-surface"></div>
+            </article>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+  </html>
