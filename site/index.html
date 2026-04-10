@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Spotstrom-Rechner fuer Oesterreich</title>
+    <title>Spotstrom-Rechner für Österreich</title>
     <meta name="description"
-        content="Berechnet historische Spotstromkosten fuer oesterreichische Lastprofile direkt im Browser.">
+        content="Berechnet historische Spotstromkosten für österreichische Lastprofile direkt im Browser.">
     <link rel="stylesheet" href="./styles.css">
 </head>
 
@@ -14,7 +14,7 @@
     <div class="page-shell">
         <header class="hero">
             <div class="hero-copy">
-                <p class="eyebrow">Spotstrom-Rechner fuer Oesterreich</p>
+                <p class="eyebrow">Spotstrom-Rechner für Österreich</p>
                 <h1>Historische Spotstromkosten direkt im Browser berechnen</h1>
                 <p class="hero-text">
                     Lade dein Lastprofil hoch, setze den Lieferanten-Offset und berechne die
@@ -28,7 +28,7 @@
                     keine Verbrauchsdaten oder Nutzungsdaten an diese Website gesendet.
                 </p>
                 <p>
-                    Fuer die Berechnung werden nur oeffentliche Day-Ahead-Preise direkt von
+                    Für die Berechnung werden nur öffentliche Day-Ahead-Preise direkt von
                     <a href="https://spot.utilitarian.io" target="_blank" rel="noreferrer">Utilitarian Spot</a>
                     geladen. Dein Lastprofil wird dabei nicht hochgeladen.
                 </p>
@@ -47,7 +47,7 @@
                         Bei Netz NÖ findest du die Datei zum Beispiel im Smart-Meter-Portal unter
                         <a href="https://smartmeter.netz-noe.at/#/verbrauch" target="_blank"
                             rel="noreferrer">Verbrauch</a>.
-                        Dort auf <strong>Jahr</strong> umstellen, das gewuenschte Jahr waehlen und dann bei
+                        Dort auf <strong>Jahr</strong> umstellen, das gewünschte Jahr wählen und dann bei
                         <strong>Download</strong> die Option <strong>Tarifkalkulator</strong> verwenden.
                     </p>
                     <p>
@@ -61,12 +61,12 @@
                     <h2>Was ist der Lieferanten-Offset?</h2>
                     <p>
                         Der Lieferanten-Offset ist der Aufschlag deines Stromlieferanten auf den reinen Spotmarktpreis,
-                        meist in <strong>ct/kWh netto</strong>. In Tarifblaettern wird er oft als Aufschlag auf den
-                        Boersenpreis,
+                        meist in <strong>ct/kWh netto</strong>. In Tarifblättern wird er oft als Aufschlag auf den
+                        Börsenpreis,
                         Energieaufschlag oder Handling Fee ausgewiesen.
                     </p>
                     <p>
-                        Fuer Tarifvergleiche ist vor allem der Preis <strong>inklusive Lieferanten-Offset, ohne
+                        Für Tarifvergleiche ist vor allem der Preis <strong>inklusive Lieferanten-Offset, ohne
                             USt</strong>
                         relevant. Brutto bedeutet in dieser Anwendung: <strong>inklusive Lieferanten-Offset und
                             USt</strong>.
@@ -98,7 +98,7 @@
                         <label class="field compact-field">
                             <span>USt in %</span>
                             <input id="vat-rate" type="number" value="20" min="0" step="0.1">
-                            <small>Standard fuer Privatkund:innen in Oesterreich: 20 %.</small>
+                            <small>Standard für Privatkund:innen in Österreich: 20 %.</small>
                         </label>
                     </details>
 
@@ -142,7 +142,7 @@
                         <h3>Tageskosten im Jahresverlauf</h3>
                         <p class="chart-explainer">
                             Macht sichtbar, an welchen Tagen die Kosten besonders hoch oder niedrig waren.
-                            Die Netto-Linie ist inklusive Lieferanten-Offset, die Brutto-Linie zusaetzlich inklusive
+                            Die Netto-Linie ist inklusive Lieferanten-Offset, die Brutto-Linie zusätzlich inklusive
                             USt.
                         </p>
                         <div id="chart-daily-costs" class="chart-surface"></div>
@@ -151,8 +151,8 @@
                     <article class="panel chart-panel">
                         <h3>Durchschnittliche Kosten nach Wochentag</h3>
                         <p class="chart-explainer">
-                            Vergleicht, ob einzelne Wochentage typischerweise teurer oder guenstiger sind.
-                            Auch hier ist Netto inklusive Lieferanten-Offset und Brutto zusaetzlich inklusive USt.
+                            Vergleicht, ob einzelne Wochentage typischerweise teurer oder günstiger sind.
+                            Auch hier ist Netto inklusive Lieferanten-Offset und Brutto zusätzlich inklusive USt.
                         </p>
                         <div id="chart-weekday-costs" class="chart-surface"></div>
                     </article>
@@ -160,7 +160,7 @@
                     <article class="panel chart-panel">
                         <h3>Verbrauch und Marktpreis pro Monat</h3>
                         <p class="chart-explainer">
-                            Stellt gegenueber, wie sich monatlicher Verbrauch und verbrauchsgewichteter
+                            Stellt gegenüber, wie sich monatlicher Verbrauch und verbrauchsgewichteter
                             Spotmarktpreis zueinander verhalten.
                         </p>
                         <div id="chart-monthly-consumption-price" class="chart-surface"></div>
@@ -170,7 +170,7 @@
                         <h3>Durchschnittliches Tages-Lastprofil</h3>
                         <p class="chart-explainer">
                             Die blaue Linie zeigt den durchschnittlichen Verbrauch pro 15-Minuten-Block
-                            ueber das gesamte Jahr. Das Band markiert die mittleren 50 % aller Beobachtungen
+                            über das gesamte Jahr. Das Band markiert die mittleren 50 % aller Beobachtungen
                             und macht Streuung und wiederkehrende Lastspitzen sichtbar.
                         </p>
                         <div id="chart-daily-load-profile" class="chart-surface"></div>
@@ -187,8 +187,8 @@
                     rel="noreferrer">GitHub</a>.
             </p>
             <p>
-                <strong>Hinweis:</strong> Alle Berechnungen und Inhalte erfolgen ohne Gewaehr und dienen
-                ausschliesslich der unverbindlichen Information, nicht der Beratung.
+                <strong>Hinweis:</strong> Alle Berechnungen und Inhalte erfolgen ohne Gewähr und dienen
+                ausschließlich der unverbindlichen Information, nicht der Beratung.
             </p>
         </footer>
     </div>

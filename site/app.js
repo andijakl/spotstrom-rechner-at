@@ -79,7 +79,7 @@ form.addEventListener("submit", async (event) => {
 async function runCalculation() {
     const file = loadProfileInput.files?.[0];
     if (!file) {
-        setStatus("Bitte zuerst eine Lastprofil-CSV auswaehlen.", true);
+        setStatus("Bitte zuerst eine Lastprofil-CSV auswählen.", true);
         return;
     }
 
@@ -87,7 +87,7 @@ async function runCalculation() {
     const vatRate = Number.parseFloat(vatRateInput.value || "0") / 100;
 
     if (Number.isNaN(supplierOffsetCtPerKwh) || Number.isNaN(vatRate)) {
-        setStatus("Offset und USt muessen gueltige Zahlen sein.", true);
+        setStatus("Offset und USt müssen gültige Zahlen sein.", true);
         return;
     }
 
@@ -99,7 +99,7 @@ async function runCalculation() {
         const loadText = await file.text();
         const load = readLoadProfile(loadText);
         if (!load.length) {
-            throw new Error("Das Lastprofil enthaelt keine auswertbaren Zeilen.");
+            throw new Error("Das Lastprofil enthält keine auswertbaren Zeilen.");
         }
 
         setStatus("Spotpreise werden direkt von Utilitarian Spot geladen ...");
@@ -121,7 +121,7 @@ async function runCalculation() {
 
 function setBusy(isBusy) {
     calculateButton.disabled = isBusy;
-    calculateButton.textContent = isBusy ? "Berechnung laeuft ..." : "Berechnung starten";
+    calculateButton.textContent = isBusy ? "Berechnung läuft ..." : "Berechnung starten";
 }
 
 function setStatus(message, isError = false) {
@@ -316,7 +316,7 @@ async function fetchUtilitarianPrices(zone, start, end) {
             }
             const data = await response.json();
             if (!Array.isArray(data)) {
-                throw new Error(`Unerwartete Antwort von Utilitarian Spot fuer ${year}.`);
+                throw new Error(`Unerwartete Antwort von Utilitarian Spot für ${year}.`);
             }
             return data;
         }),
@@ -534,7 +534,7 @@ function renderSummaryTable(summary) {
         {
             label: "Lieferanten-Offset",
             value: currency.format(summary.supplier_offset_cost_eur),
-            note: "Aufschlag in ct/kWh netto auf den tatsaechlichen Verbrauch und bereits in den Netto-/Brutto-Werten enthalten.",
+            note: "Aufschlag in ct/kWh netto auf den tatsächlichen Verbrauch und bereits in den Netto-/Brutto-Werten enthalten.",
         },
         {
             label: "Verbrauch gesamt",
@@ -544,7 +544,7 @@ function renderSummaryTable(summary) {
         {
             label: "Preisabdeckung",
             value: percent2.format(summary.priced_consumption_share),
-            note: `${number3.format(summary.missing_price_consumption_kwh)} kWh liegen in Intervallen ohne geladenen Spotpreis. Diese kWh zaehlen beim Verbrauch mit, aber nicht in die verbrauchsgewichteten Preiskennzahlen hinein.`,
+            note: `${number3.format(summary.missing_price_consumption_kwh)} kWh liegen in Intervallen ohne geladenen Spotpreis. Diese kWh zählen beim Verbrauch mit, aber nicht in die verbrauchsgewichteten Preiskennzahlen hinein.`,
         },
     ];
 
@@ -808,7 +808,7 @@ function quantile(values, quantileValue) {
 function renderMonthlyCostsChart(detail) {
     const monthly = buildMonthlyStats(detail);
     if (!monthly.length) {
-        renderEmptyChart(chartMounts.monthlyCosts, "Keine Monatsdaten verfuegbar.");
+        renderEmptyChart(chartMounts.monthlyCosts, "Keine Monatsdaten verfügbar.");
         return;
     }
 
@@ -829,7 +829,7 @@ function renderMonthlyCostsChart(detail) {
 function renderDailyCostsChart(detail) {
     const daily = buildDailyStats(detail);
     if (!daily.length) {
-        renderEmptyChart(chartMounts.dailyCosts, "Keine Tagesdaten verfuegbar.");
+        renderEmptyChart(chartMounts.dailyCosts, "Keine Tagesdaten verfügbar.");
         return;
     }
 
@@ -851,7 +851,7 @@ function renderDailyCostsChart(detail) {
 function renderWeekdayCostsChart(detail) {
     const weekday = buildWeekdayStats(detail);
     if (!weekday.length) {
-        renderEmptyChart(chartMounts.weekdayCosts, "Keine Wochentagsdaten verfuegbar.");
+        renderEmptyChart(chartMounts.weekdayCosts, "Keine Wochentagsdaten verfügbar.");
         return;
     }
 
@@ -868,7 +868,7 @@ function renderWeekdayCostsChart(detail) {
 function renderMonthlyConsumptionPriceChart(detail) {
     const monthly = buildMonthlyStats(detail);
     if (!monthly.length) {
-        renderEmptyChart(chartMounts.monthlyConsumptionPrice, "Keine Monatsdaten verfuegbar.");
+        renderEmptyChart(chartMounts.monthlyConsumptionPrice, "Keine Monatsdaten verfügbar.");
         return;
     }
 
@@ -890,7 +890,7 @@ function renderMonthlyConsumptionPriceChart(detail) {
 function renderDailyLoadProfileChart(detail) {
     const profile = buildLoadProfileStats(detail);
     if (!profile.length) {
-        renderEmptyChart(chartMounts.dailyLoadProfile, "Kein Lastprofil verfuegbar.");
+        renderEmptyChart(chartMounts.dailyLoadProfile, "Kein Lastprofil verfügbar.");
         return;
     }
 

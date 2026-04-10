@@ -1,30 +1,30 @@
 # Spotstrom-Rechner AT
 
-Dieses Projekt enthaelt zwei Teile:
+Dieses Projekt enthält zwei Teile:
 
-- das Python-Skript [spot_tariff_cost_calc_utilitarian.py](spot_tariff_cost_calc_utilitarian.py) fuer lokale Batch-Auswertungen
-- die statische Webanwendung in [site/index.html](site/index.html), die komplett im Browser laeuft und fuer GitHub Pages vorbereitet ist
+- das Python-Skript [spot_tariff_cost_calc_utilitarian.py](spot_tariff_cost_calc_utilitarian.py) für lokale Batch-Auswertungen
+- die statische Webanwendung in [site/index.html](site/index.html), die komplett im Browser läuft und für GitHub Pages vorbereitet ist
 
-Der Fokus liegt auf der oeffentlichen Utilitarian-Spot-API fuer Oesterreich (`AT`).
+Der Fokus liegt auf der öffentlichen Utilitarian-Spot-API für Österreich (`AT`).
 
 ## Webanwendung
 
 Die GitHub-Pages-Version bietet:
 
-- Upload eines oesterreichischen Lastprofils direkt im Browser
-- Eingabe des Lieferanten-Offset; die USt liegt in den erweiterten Einstellungen und ist standardmaessig auf 20 % gesetzt
+- Upload eines österreichischen Lastprofils direkt im Browser
+- Eingabe des Lieferanten-Offset; die USt liegt in den erweiterten Einstellungen und ist standardmäßig auf 20 % gesetzt
 - Lokale Verarbeitung des Lastprofils ohne Upload an einen eigenen Server
-- Laden der oeffentlichen Day-Ahead-Preise direkt von Utilitarian Spot
-- Verbrauchtgewichtete Preisniveaus fuer:
+- Laden der öffentlichen Day-Ahead-Preise direkt von Utilitarian Spot
+- Verbrauchtgewichtete Preisniveaus für:
   - reinen Spotmarktpreis ohne Aufschlag und ohne USt
   - Spotmarktpreis inklusive Lieferanten-Offset, ohne USt
   - Spotmarktpreis inklusive Lieferanten-Offset und USt
-- Diagramme fuer Monatskosten, Tageskosten, Wochentage, Verbrauch vs. Marktpreis
+- Diagramme für Monatskosten, Tageskosten, Wochentage, Verbrauch vs. Marktpreis
   und ein durchschnittliches Tages-Lastprofil
 - Download von Summary-JSON, Detail-CSV und Ergebnisbericht als Textdatei
-- Hinweise direkt auf der Seite, wie das Lastprofil etwa bei Netz NÖ oder ueber e-control bereitgestellt wird
+- Hinweise direkt auf der Seite, wie das Lastprofil etwa bei Netz NÖ oder über e-control bereitgestellt wird
 
-Die Weboberflaeche geht davon aus, dass der Zeitstempel das Ende des Ablesezeitraums beschreibt, wie es im e-control Tarifkalkulator-Format ueblich ist. Der Datumsbereich wird automatisch aus der hochgeladenen Datei erkannt.
+Die Weboberfläche geht davon aus, dass der Zeitstempel das Ende des Ablesezeitraums beschreibt, wie es im e-control Tarifkalkulator-Format üblich ist. Der Datumsbereich wird automatisch aus der hochgeladenen Datei erkannt.
 
 ## Python-Skript
 
@@ -39,7 +39,7 @@ Die Weboberflaeche geht davon aus, dass der Zeitstempel das Ende des Ablesezeitr
 - Erstellung von Diagrammen für Monatskosten, Tageskosten, Wochentagsdurchschnitte,
   Verbrauch vs. Marktpreis sowie ein durchschnittliches Tages-Lastprofil
 
-## Voraussetzungen fuer das Python-Skript
+## Voraussetzungen für das Python-Skript
 
 - Python 3.14 oder kompatibel
 - Eine virtuelle Umgebung, zum Beispiel `.venv`
@@ -87,7 +87,7 @@ Bei `--output-prefix 2025_spot` werden folgende Dateien erzeugt:
 
 ## GitHub Pages Deployment
 
-Die Weboberflaeche liegt in [site/index.html](site/index.html). Der Workflow in [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml) veroeffentlicht genau diesen Ordner auf GitHub Pages.
+Die Weboberfläche liegt in [site/index.html](site/index.html). Der Workflow in [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml) veröffentlicht genau diesen Ordner auf GitHub Pages.
 
 Empfohlener Repository-Name: `spotstrom-rechner-at`
 
@@ -100,12 +100,12 @@ git commit -m "Initial commit"
 gh repo create andijakl/spotstrom-rechner-at --public --source=. --remote=origin --push
 ```
 
-Danach kann GitHub Pages ueber den Workflow bereitgestellt werden.
+Danach kann GitHub Pages über den Workflow bereitgestellt werden.
 
 ## Hinweise
 
 - Netzgebühren, Abgaben, Grundpreise, Boni und tarifliche Sonderlogiken sind nicht enthalten.
 - Fehlende Preiszeilen werden im Report ausgewiesen.
-- Die ausgewiesenen Preise pro kWh sind verbrauchsgewichtet und werden nur ueber Intervalle mit verfuegbarem Preis gebildet; die Preisabdeckung wird separat ausgewiesen.
+- Die ausgewiesenen Preise pro kWh sind verbrauchsgewichtet und werden nur über Intervalle mit verfügbarem Preis gebildet; die Preisabdeckung wird separat ausgewiesen.
 - Das Skript verarbeitet gemischte Zeitzonen-Offsets im Lastprofil korrekt, etwa bei Sommer-/Winterzeitwechseln.
-- Fuer die Webanwendung werden nur oeffentliche Preisdaten von Utilitarian Spot geladen; das hochgeladene Lastprofil bleibt lokal im Browser.
+- Für die Webanwendung werden nur öffentliche Preisdaten von Utilitarian Spot geladen; das hochgeladene Lastprofil bleibt lokal im Browser.
