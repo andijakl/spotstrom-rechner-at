@@ -154,13 +154,13 @@ def read_load_profile(path: Path, timestamp_is: str = "end") -> pd.DataFrame:
     df = _read_delimited_auto(path)
 
     time_col = _pick_existing(df, [
-        "Messzeitpunkt", "Zeitstempel", "timestamp", "datetime", "Datum", "date"
+        "Ende Ablesezeitraum", "Ende ablesezeitraum", "Messzeitpunkt", "Zeitstempel", "timestamp", "datetime", "Datum", "date"
     ])
     consumption_col = _pick_existing(df, [
         "Verbrauch [kWh]", "Verbrauch[kWh]", "Verbrauch", "consumption_kwh", "kwh"
     ])
     interval_col = _pick_existing(df, [
-        "Messinterval", "Messintervall", "resolution", "Intervall"
+        "Messintervall", "Messinterval", "resolution", "Intervall"
     ])
 
     if time_col is None or consumption_col is None:

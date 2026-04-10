@@ -1,16 +1,16 @@
 :root {
-  --bg: #f6efe3;
-  --bg-accent: #fbe3a7;
-  --ink: #1f2a2a;
-  --muted: #5c6b68;
-  --panel: rgba(255, 252, 246, 0.92);
-  --panel-strong: #fffdf8;
-  --line: rgba(31, 42, 42, 0.1);
-  --brand: #005f73;
-  --brand-2: #d97706;
-  --good: #2b9348;
-  --warm: #c2410c;
-  --shadow: 0 20px 50px rgba(31, 42, 42, 0.12);
+  --bg: #eff7eb;
+  --bg-accent: #fde68a;
+  --ink: #1d2c28;
+  --muted: #536761;
+  --panel: rgba(250, 255, 247, 0.9);
+  --panel-strong: #fefffb;
+  --line: rgba(29, 44, 40, 0.1);
+  --brand: #197b4a;
+  --brand-2: #f59e0b;
+  --good: #2f9e44;
+  --warm: #d97706;
+  --shadow: 0 20px 50px rgba(25, 64, 46, 0.12);
   --radius: 24px;
   --radius-small: 16px;
 }
@@ -25,8 +25,9 @@ body {
   color: var(--ink);
   font-family: "Avenir Next", "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(251, 227, 167, 0.8), transparent 30%),
-    linear-gradient(180deg, #f4ead7 0%, #f6efe3 45%, #fdfbf5 100%);
+    radial-gradient(circle at top left, rgba(253, 230, 138, 0.7), transparent 26%),
+    radial-gradient(circle at top right, rgba(187, 247, 208, 0.55), transparent 24%),
+    linear-gradient(180deg, #eef9ea 0%, #f5fbef 46%, #fffdf6 100%);
 }
 
 a {
@@ -115,6 +116,23 @@ a {
   gap: 24px;
 }
 
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.info-panel p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.section-text {
+  margin: 6px 0 0;
+  max-width: 60ch;
+}
+
 .calculator-form {
   display: grid;
   gap: 18px;
@@ -182,8 +200,8 @@ button:focus {
 .primary-button {
   padding: 16px 22px;
   color: white;
-  background: linear-gradient(135deg, var(--brand), #0a9396);
-  box-shadow: 0 16px 28px rgba(0, 95, 115, 0.22);
+  background: linear-gradient(135deg, var(--brand), #4caf50);
+  box-shadow: 0 16px 28px rgba(25, 123, 74, 0.22);
   font-weight: 700;
 }
 
@@ -229,7 +247,7 @@ button:focus {
 
 .download-button {
   padding: 10px 16px;
-  background: rgba(0, 95, 115, 0.08);
+  background: rgba(25, 123, 74, 0.08);
   color: var(--brand);
   font-weight: 700;
 }
@@ -244,7 +262,7 @@ button:focus {
 .kpi-card {
   padding: 18px;
   border-radius: 20px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 249, 238, 0.96));
+  background: linear-gradient(180deg, rgba(253, 255, 251, 0.9), rgba(248, 252, 241, 0.98));
   border: 1px solid rgba(31, 42, 42, 0.08);
 }
 
@@ -298,18 +316,6 @@ button:focus {
   color: var(--muted);
 }
 
-.report-output {
-  margin: 0;
-  padding: 18px;
-  overflow: auto;
-  border-radius: 16px;
-  background: #fffefa;
-  border: 1px solid rgba(31, 42, 42, 0.08);
-  color: #233634;
-  font-family: "SFMono-Regular", Consolas, monospace;
-  line-height: 1.5;
-}
-
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -361,6 +367,7 @@ button:focus {
 
 @media (max-width: 980px) {
   .hero,
+  .info-grid,
   .chart-grid,
   .kpi-grid,
   .field-grid {

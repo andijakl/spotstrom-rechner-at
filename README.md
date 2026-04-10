@@ -12,7 +12,7 @@ Der Fokus liegt auf der oeffentlichen Utilitarian-Spot-API fuer Oesterreich (`AT
 Die GitHub-Pages-Version bietet:
 
 - Upload eines oesterreichischen Lastprofils direkt im Browser
-- Eingabe von Lieferanten-Offset und USt, standardmaessig 20 %
+- Eingabe des Lieferanten-Offset; die USt liegt in den erweiterten Einstellungen und ist standardmaessig auf 20 % gesetzt
 - Lokale Verarbeitung des Lastprofils ohne Upload an einen eigenen Server
 - Laden der oeffentlichen Day-Ahead-Preise direkt von Utilitarian Spot
 - Verbrauchtgewichtete Preisniveaus fuer:
@@ -22,6 +22,9 @@ Die GitHub-Pages-Version bietet:
 - Diagramme fuer Monatskosten, Tageskosten, Wochentage, Verbrauch vs. Marktpreis
   und ein durchschnittliches Tages-Lastprofil
 - Download von Summary-JSON, Detail-CSV und Ergebnisbericht als Textdatei
+- Hinweise direkt auf der Seite, wie das Lastprofil etwa bei Netz NÖ oder ueber e-control bereitgestellt wird
+
+Die Weboberflaeche geht davon aus, dass der Zeitstempel das Ende des Ablesezeitraums beschreibt, wie es im e-control Tarifkalkulator-Format ueblich ist. Der Datumsbereich wird automatisch aus der hochgeladenen Datei erkannt.
 
 ## Python-Skript
 
@@ -64,7 +67,6 @@ python3 spot_tariff_cost_calc_utilitarian.py \
 Wichtige Optionen:
 
 - `--price-csv`: lokale Preisdatei statt API-Abruf verwenden
-- `--timestamp-is start|end`: Interpretation des Messzeitpunkts im Lastprofil
 - `--expand-hourly-to-quarter-hour`: Stundenpreise explizit auf Viertelstunden erweitern
 - `--disable-auto-expand`: automatische Erweiterung deaktivieren
 - `--drop-missing-prices`: Zeilen ohne Preis vor Export entfernen

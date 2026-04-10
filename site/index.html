@@ -1,151 +1,179 @@
 <!doctype html>
 <html lang="de">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Spotstrom-Rechner AT</title>
-    <meta
-      name="description"
-      content="Berechnet historische Spotstromkosten fuer oesterreichische Lastprofile direkt im Browser."
-    >
+    <title>Spotstrom-Rechner fuer Oesterreich</title>
+    <meta name="description"
+        content="Berechnet historische Spotstromkosten fuer oesterreichische Lastprofile direkt im Browser.">
     <link rel="stylesheet" href="./styles.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="page-shell">
-      <header class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Spotstrom-Rechner AT</p>
-          <h1>Historische Spotstromkosten direkt im Browser berechnen</h1>
-          <p class="hero-text">
-            Lade dein Lastprofil hoch, setze Lieferanten-Offset und USt und berechne die
-            verbrauchsgewichteten Kosten samt Diagrammen lokal in deinem Browser.
-          </p>
-        </div>
-        <div class="hero-panel">
-          <h2>Datenschutz</h2>
-          <p>
-            Die Verarbeitung deines Lastprofils passiert lokal in deinem Browser. Es werden
-            keine Verbrauchsdaten oder Nutzungsdaten an diese Website gesendet.
-          </p>
-          <p>
-            Fuer die Berechnung werden nur oeffentliche Day-Ahead-Preise direkt von
-            <a href="https://spot.utilitarian.io" target="_blank" rel="noreferrer">Utilitarian Spot</a>
-            geladen. Dein Lastprofil wird dabei nicht hochgeladen.
-          </p>
-        </div>
-      </header>
-
-      <main class="content-grid">
-        <section class="panel input-panel">
-          <h2>Berechnung starten</h2>
-          <form id="calculator-form" class="calculator-form">
-            <label class="field">
-              <span>Lastprofil-CSV</span>
-              <input id="load-profile" type="file" accept=".csv,text/csv" required>
-              <small>Erwartet wird ein Smart-Meter-Lastprofil mit Zeitstempel und Verbrauch in kWh.</small>
-            </label>
-
-            <div class="field-grid">
-              <label class="field">
-                <span>Lieferanten-Offset in ct/kWh netto</span>
-                <input id="supplier-offset" type="number" value="1.49" min="0" step="0.01">
-              </label>
-              <label class="field">
-                <span>USt in %</span>
-                <input id="vat-rate" type="number" value="20" min="0" step="0.1">
-              </label>
+        <header class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">Spotstrom-Rechner fuer Oesterreich</p>
+                <h1>Historische Spotstromkosten direkt im Browser berechnen</h1>
+                <p class="hero-text">
+                    Lade dein Lastprofil hoch, setze den Lieferanten-Offset und berechne die
+                    verbrauchsgewichteten Kosten samt Diagrammen lokal in deinem Browser.
+                </p>
             </div>
-
-            <details class="advanced-settings">
-              <summary>Erweiterte Einstellungen</summary>
-              <label class="field compact-field">
-                <span>Bedeutung des Messzeitpunkts</span>
-                <select id="timestamp-is">
-                  <option value="end" selected>Messzeitpunkt ist Intervallende</option>
-                  <option value="start">Messzeitpunkt ist Intervallbeginn</option>
-                </select>
-              </label>
-            </details>
-
-            <button id="calculate-button" type="submit" class="primary-button">
-              Berechnung starten
-            </button>
-          </form>
-
-          <div id="status" class="status" aria-live="polite"></div>
-        </section>
-
-        <section id="results" class="results" hidden>
-          <section class="panel">
-            <div class="section-header">
-              <div>
-                <p class="eyebrow">Ergebnisse</p>
-                <h2>Preise und Gesamtkosten</h2>
-              </div>
-              <div id="export-actions" class="export-actions"></div>
+            <div class="hero-panel">
+                <h2>Datenschutz</h2>
+                <p>
+                    Die Verarbeitung deines Lastprofils passiert lokal in deinem Browser. Es werden
+                    keine Verbrauchsdaten oder Nutzungsdaten an diese Website gesendet.
+                </p>
+                <p>
+                    Fuer die Berechnung werden nur oeffentliche Day-Ahead-Preise direkt von
+                    <a href="https://spot.utilitarian.io" target="_blank" rel="noreferrer">Utilitarian Spot</a>
+                    geladen. Dein Lastprofil wird dabei nicht hochgeladen.
+                </p>
             </div>
-            <div id="kpi-grid" class="kpi-grid"></div>
-            <div id="result-summary" class="result-summary"></div>
-          </section>
+        </header>
 
-          <section class="panel report-panel">
-            <h2>Ergebnisbericht</h2>
-            <p class="chart-explainer">
-              Der Bericht fasst alle relevanten Kennzahlen zusammen und kann als Textdatei
-              heruntergeladen werden.
-            </p>
-            <pre id="report-output" class="report-output"></pre>
-          </section>
+        <main class="content-grid">
+            <section class="info-grid">
+                <article class="panel info-panel">
+                    <h2>Was ist das Lastprofil?</h2>
+                    <p>
+                        Das Lastprofil ist die CSV-Datei mit deinen Viertelstundenwerten aus dem Smart-Meter-Portal.
+                        Diese Anwendung verarbeitet e-control Tarifkalkulator-kompatible CSV-Dateien sowie das von Netz NÖ bekannte Format.
+                    </p>
+                    <p>
+                        Bei Netz NÖ findest du die Datei im Smart-Meter-Portal unter
+                        <a href="https://smartmeter.netz-noe.at/#/verbrauch" target="_blank" rel="noreferrer">Verbrauch</a>.
+                        Dort auf <strong>Jahr</strong> umstellen, das gewuenschte Jahr waehlen und dann bei
+                        <strong>Download</strong> die Option <strong>Tarifkalkulator</strong> verwenden.
+                    </p>
+                    <p>
+                        Vorlagen und Hinweise zum Format findest du auch bei
+                        <a href="https://www.e-control.at/marktteilnehmer/infos/tarifkalkulator" target="_blank" rel="noreferrer">e-control</a>.
+                    </p>
+                </article>
 
-          <section class="chart-grid">
-            <article class="panel chart-panel">
-              <h3>Monatliche Energiekosten</h3>
-              <p class="chart-explainer">
-                Zeigt pro Monat den Marktpreisanteil, den Lieferanten-Offset und die daraus
-                resultierenden Bruttokosten.
-              </p>
-              <div id="chart-monthly-costs" class="chart-surface"></div>
-            </article>
+                <article class="panel info-panel">
+                    <h2>Was ist der Lieferanten-Offset?</h2>
+                    <p>
+                        Der Lieferanten-Offset ist der Aufschlag deines Stromlieferanten auf den reinen Spotmarktpreis,
+                        meist in <strong>ct/kWh netto</strong>. In Tarifblaettern wird er oft als Aufschlag auf den Boersenpreis,
+                        Energieaufschlag oder Handling Fee ausgewiesen.
+                    </p>
+                    <p>
+                        Fuer Tarifvergleiche ist vor allem der Preis <strong>inklusive Lieferanten-Offset, ohne USt</strong>
+                        relevant. Brutto bedeutet in dieser Anwendung: <strong>inklusive Lieferanten-Offset und USt</strong>.
+                    </p>
+                    <p>
+                        Der Datumsbereich wird automatisch aus deiner CSV erkannt. Du kannst also Lastprofile fuer 2024,
+                        2025 oder andere Jahre direkt hochladen.
+                    </p>
+                </article>
+            </section>
+            <section class="panel input-panel">
+                <h2>Berechnung starten</h2>
+                <form id="calculator-form" class="calculator-form">
+                    <label class="field">
+                        <span>Lastprofil-CSV</span>
+                        <input id="load-profile" type="file" accept=".csv,text/csv" required>
+                        <small>Erwartet wird eine e-control Tarifkalkulator-kompatible CSV mit Ende des Ablesezeitraums, Messintervall und Verbrauch.</small>
+                    </label>
 
-            <article class="panel chart-panel">
-              <h3>Tageskosten im Jahresverlauf</h3>
-              <p class="chart-explainer">
-                Macht sichtbar, an welchen Tagen die Kosten besonders hoch oder niedrig waren.
-              </p>
-              <div id="chart-daily-costs" class="chart-surface"></div>
-            </article>
+                    <label class="field">
+                        <span>Lieferanten-Offset in ct/kWh netto</span>
+                        <input id="supplier-offset" type="number" value="1.49" min="0" step="0.01">
+                        <small>Das ist der Aufschlag deines Lieferanten auf den reinen Spotmarktpreis.</small>
+                    </label>
 
-            <article class="panel chart-panel">
-              <h3>Durchschnittliche Kosten nach Wochentag</h3>
-              <p class="chart-explainer">
-                Vergleicht, ob einzelne Wochentage typischerweise teurer oder guenstiger sind.
-              </p>
-              <div id="chart-weekday-costs" class="chart-surface"></div>
-            </article>
+                    <details class="advanced-settings">
+                        <summary>Erweiterte Einstellungen</summary>
+                        <label class="field compact-field">
+                            <span>USt in %</span>
+                            <input id="vat-rate" type="number" value="20" min="0" step="0.1">
+                            <small>Standard fuer Privatkund:innen in Oesterreich: 20 %.</small>
+                        </label>
+                    </details>
 
-            <article class="panel chart-panel">
-              <h3>Verbrauch und Marktpreis pro Monat</h3>
-              <p class="chart-explainer">
-                Stellt gegenueber, wie sich monatlicher Verbrauch und verbrauchsgewichteter
-                Spotmarktpreis zueinander verhalten.
-              </p>
-              <div id="chart-monthly-consumption-price" class="chart-surface"></div>
-            </article>
+                    <button id="calculate-button" type="submit" class="primary-button">
+                        Berechnung starten
+                    </button>
+                </form>
 
-            <article class="panel chart-panel chart-panel-wide">
-              <h3>Durchschnittliches Tages-Lastprofil</h3>
-              <p class="chart-explainer">
-                Die blaue Linie zeigt den durchschnittlichen Verbrauch pro 15-Minuten-Block
-                ueber das gesamte Jahr. Das Band markiert die mittleren 50 % aller Beobachtungen
-                und macht Streuung und wiederkehrende Lastspitzen sichtbar.
-              </p>
-              <div id="chart-daily-load-profile" class="chart-surface"></div>
-            </article>
-          </section>
-        </section>
-      </main>
+                <div id="status" class="status" aria-live="polite"></div>
+            </section>
+
+            <section id="results" class="results" hidden>
+                <section class="panel">
+                    <div class="section-header">
+                        <div>
+                            <p class="eyebrow">Ergebnisse</p>
+                            <h2>Preise und Gesamtkosten</h2>
+                            <p class="hero-text section-text">
+                                Netto bedeutet hier: <strong>inklusive Lieferanten-Offset, ohne USt</strong>.
+                                Brutto bedeutet: <strong>inklusive Lieferanten-Offset und USt</strong>.
+                            </p>
+                        </div>
+                        <div id="export-actions" class="export-actions"></div>
+                    </div>
+                    <div id="kpi-grid" class="kpi-grid"></div>
+                    <div id="result-summary" class="result-summary"></div>
+                </section>
+
+                <section class="chart-grid">
+                    <article class="panel chart-panel">
+                        <h3>Monatliche Energiekosten</h3>
+                        <p class="chart-explainer">
+                            Zeigt pro Monat den Marktpreisanteil, den Lieferanten-Offset und die daraus
+                            resultierenden Bruttokosten. Netto bedeutet in den Berechnungen stets inklusive
+                            Lieferanten-Offset, aber ohne USt.
+                        </p>
+                        <div id="chart-monthly-costs" class="chart-surface"></div>
+                    </article>
+
+                    <article class="panel chart-panel">
+                        <h3>Tageskosten im Jahresverlauf</h3>
+                        <p class="chart-explainer">
+                            Macht sichtbar, an welchen Tagen die Kosten besonders hoch oder niedrig waren.
+                            Die Netto-Linie ist inklusive Lieferanten-Offset, die Brutto-Linie zusaetzlich inklusive USt.
+                        </p>
+                        <div id="chart-daily-costs" class="chart-surface"></div>
+                    </article>
+
+                    <article class="panel chart-panel">
+                        <h3>Durchschnittliche Kosten nach Wochentag</h3>
+                        <p class="chart-explainer">
+                            Vergleicht, ob einzelne Wochentage typischerweise teurer oder guenstiger sind.
+                            Auch hier ist Netto inklusive Lieferanten-Offset und Brutto zusaetzlich inklusive USt.
+                        </p>
+                        <div id="chart-weekday-costs" class="chart-surface"></div>
+                    </article>
+
+                    <article class="panel chart-panel">
+                        <h3>Verbrauch und Marktpreis pro Monat</h3>
+                        <p class="chart-explainer">
+                            Stellt gegenueber, wie sich monatlicher Verbrauch und verbrauchsgewichteter
+                            Spotmarktpreis zueinander verhalten.
+                        </p>
+                        <div id="chart-monthly-consumption-price" class="chart-surface"></div>
+                    </article>
+
+                    <article class="panel chart-panel chart-panel-wide">
+                        <h3>Durchschnittliches Tages-Lastprofil</h3>
+                        <p class="chart-explainer">
+                            Die blaue Linie zeigt den durchschnittlichen Verbrauch pro 15-Minuten-Block
+                            ueber das gesamte Jahr. Das Band markiert die mittleren 50 % aller Beobachtungen
+                            und macht Streuung und wiederkehrende Lastspitzen sichtbar.
+                        </p>
+                        <div id="chart-daily-load-profile" class="chart-surface"></div>
+                    </article>
+                </section>
+            </section>
+        </main>
     </div>
 
     <script type="module" src="./app.js"></script>
-  </body>
-  </html>
+</body>
+
+</html>
