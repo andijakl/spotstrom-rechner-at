@@ -490,11 +490,6 @@ function renderKpis(summary) {
             note: `${number2.format(summary.average_market_price_eur_mwh_weighted)} EUR/MWh`,
         },
         {
-            label: "Marktpreis-Kosten",
-            value: currency.format(summary.market_cost_eur),
-            note: "Reiner Spotmarktanteil ohne Lieferanten-Offset und ohne USt",
-        },
-        {
             label: "2) Spotmarktpreis plus Lieferanten-Offset, ohne USt",
             value: `${number3.format(summary.average_price_ct_kwh_with_supplier_net)} ct/kWh`,
             note: `inkl. ${number3.format(summary.supplier_offset_ct_kwh)} ct/kWh Aufschlag`,
@@ -503,6 +498,11 @@ function renderKpis(summary) {
             label: "3) Spotmarktpreis plus Lieferanten-Offset und USt",
             value: `${number3.format(summary.average_price_ct_kwh_with_supplier_gross)} ct/kWh`,
             note: `inkl. ${(summary.vat_rate * 100).toFixed(1).replace('.', ',')} % USt`,
+        },
+        {
+            label: "Marktpreis-Kosten",
+            value: currency.format(summary.market_cost_eur),
+            note: "Reiner Spotmarktanteil ohne Lieferanten-Offset und ohne USt",
         },
         {
             label: "Gesamtkosten netto",

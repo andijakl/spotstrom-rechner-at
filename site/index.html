@@ -41,17 +41,19 @@
                     <h2>Was ist das Lastprofil?</h2>
                     <p>
                         Das Lastprofil ist die CSV-Datei mit deinen Viertelstundenwerten aus dem Smart-Meter-Portal.
-                        Diese Anwendung verarbeitet e-control Tarifkalkulator-kompatible CSV-Dateien sowie das von Netz NÖ bekannte Format.
+                        Diese Anwendung verarbeitet e-control Tarifkalkulator-kompatible CSV-Dateien.
                     </p>
                     <p>
-                        Bei Netz NÖ findest du die Datei im Smart-Meter-Portal unter
-                        <a href="https://smartmeter.netz-noe.at/#/verbrauch" target="_blank" rel="noreferrer">Verbrauch</a>.
+                        Bei Netz NÖ findest du die Datei zum Beispiel im Smart-Meter-Portal unter
+                        <a href="https://smartmeter.netz-noe.at/#/verbrauch" target="_blank"
+                            rel="noreferrer">Verbrauch</a>.
                         Dort auf <strong>Jahr</strong> umstellen, das gewuenschte Jahr waehlen und dann bei
                         <strong>Download</strong> die Option <strong>Tarifkalkulator</strong> verwenden.
                     </p>
                     <p>
                         Vorlagen und Hinweise zum Format findest du auch bei
-                        <a href="https://www.e-control.at/marktteilnehmer/infos/tarifkalkulator" target="_blank" rel="noreferrer">e-control</a>.
+                        <a href="https://www.e-control.at/marktteilnehmer/infos/tarifkalkulator" target="_blank"
+                            rel="noreferrer">e-control</a>.
                     </p>
                 </article>
 
@@ -59,16 +61,19 @@
                     <h2>Was ist der Lieferanten-Offset?</h2>
                     <p>
                         Der Lieferanten-Offset ist der Aufschlag deines Stromlieferanten auf den reinen Spotmarktpreis,
-                        meist in <strong>ct/kWh netto</strong>. In Tarifblaettern wird er oft als Aufschlag auf den Boersenpreis,
+                        meist in <strong>ct/kWh netto</strong>. In Tarifblaettern wird er oft als Aufschlag auf den
+                        Boersenpreis,
                         Energieaufschlag oder Handling Fee ausgewiesen.
                     </p>
                     <p>
-                        Fuer Tarifvergleiche ist vor allem der Preis <strong>inklusive Lieferanten-Offset, ohne USt</strong>
-                        relevant. Brutto bedeutet in dieser Anwendung: <strong>inklusive Lieferanten-Offset und USt</strong>.
+                        Fuer Tarifvergleiche ist vor allem der Preis <strong>inklusive Lieferanten-Offset, ohne
+                            USt</strong>
+                        relevant. Brutto bedeutet in dieser Anwendung: <strong>inklusive Lieferanten-Offset und
+                            USt</strong>.
                     </p>
                     <p>
-                        Der Datumsbereich wird automatisch aus deiner CSV erkannt. Du kannst also Lastprofile fuer 2024,
-                        2025 oder andere Jahre direkt hochladen.
+                        Der Datumsbereich wird automatisch aus deiner CSV erkannt. Du kannst also Lastprofile direkt
+                        hochladen.
                     </p>
                 </article>
             </section>
@@ -78,7 +83,8 @@
                     <label class="field">
                         <span>Lastprofil-CSV</span>
                         <input id="load-profile" type="file" accept=".csv,text/csv" required>
-                        <small>Erwartet wird eine e-control Tarifkalkulator-kompatible CSV mit Ende des Ablesezeitraums, Messintervall und Verbrauch.</small>
+                        <small>Erwartet wird eine e-control Tarifkalkulator-kompatible CSV mit Ende des Ablesezeitraums,
+                            Messintervall und Verbrauch.</small>
                     </label>
 
                     <label class="field">
@@ -136,7 +142,8 @@
                         <h3>Tageskosten im Jahresverlauf</h3>
                         <p class="chart-explainer">
                             Macht sichtbar, an welchen Tagen die Kosten besonders hoch oder niedrig waren.
-                            Die Netto-Linie ist inklusive Lieferanten-Offset, die Brutto-Linie zusaetzlich inklusive USt.
+                            Die Netto-Linie ist inklusive Lieferanten-Offset, die Brutto-Linie zusaetzlich inklusive
+                            USt.
                         </p>
                         <div id="chart-daily-costs" class="chart-surface"></div>
                     </article>
