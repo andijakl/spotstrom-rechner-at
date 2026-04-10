@@ -109,3 +109,7 @@ Danach kann GitHub Pages über den Workflow bereitgestellt werden.
 - Die ausgewiesenen Preise pro kWh sind verbrauchsgewichtet und werden nur über Intervalle mit verfügbarem Preis gebildet; die Preisabdeckung wird separat ausgewiesen.
 - Das Skript verarbeitet gemischte Zeitzonen-Offsets im Lastprofil korrekt, etwa bei Sommer-/Winterzeitwechseln.
 - Für die Webanwendung werden nur öffentliche Preisdaten von Utilitarian Spot geladen; das hochgeladene Lastprofil bleibt lokal im Browser.
+
+## Lizenz
+
+Dieses Projekt steht unter der MIT-Lizenz. Details stehen in der Datei [LICENSE](LICENSE).
